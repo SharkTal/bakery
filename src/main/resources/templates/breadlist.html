@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bread List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}">
+    <html xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+</head>
+<body>
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <table class="table table-striped" >
+        <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Type</th>
+            <th sec:authorize="hasRole('ADMIN')">Delete</th>
+            <th>Edit</th>
+        </tr>
+        <tr th:each="bread : ${breads}">
+            <td th:text = "${bread.name}"></td>
+            <td th:text = "${bread.brand}"></td>
+            <td th:text = "${bread.price}"></td>
+            <td th:text = "${bread.quantity}"></td>
+            <td th:text = "${bread.Type.typeName}"></td>
+            <td sec:authorize="hasRole('ADMIN')">
+                    <a th:href="@{/delete/{id}(id=${bread.id})}" class="btn btn-danger">Delete</a>
+            </td>
+            <td>
+
+                    <a th:href="@{/edit/{id}(id=${bread.id})}" class="btn btn-primary">Edit</a>
+            </td>
+        </tr>
+    </table>
+
+    <a href="/add" class="btn btn-primary">Add Bread</a>
+
+    <br>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</body>
+</html>

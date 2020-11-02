@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit bread order</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}">
+</head>
+<body>
+<h1>Edit Bread Order</h1>
+<div>
+    <form th:object="${bread}" th:action="@{../save}" action="#" method="post">
+        <!--The th:action="@{../save}" not @{save} -->
+        <!--Id should be added otherwise new bread is created-->
+        <input type="hidden" th:field ="*{id}" class="form-control">
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field = "*{name}" />
+        <br/>
+        <label for="brand">Brand:</label>
+        <input type="text" id="brand" th:field = "*{brand}" />
+        <br/>
+        <label for="price">Price:</label>
+        <input type="number" id="price" th:field = "*{price}" />
+        <br/>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" th:field = "*{quantity}" />
+        <br/>
+        <label for="typelist">Type:</label>
+        <select id="typelist" th:field = "*{type}" class="dropdown">
+            <option th:each="type : ${types}"
+                    th:value="${type.typeid}"
+                    th:text="${type.typeName}">
+            </option>
+        </select>
+
+        <input type="submit" class="btn btn-success" value="Save" />
+    </form>
+</div>
+</body>
+</html>
