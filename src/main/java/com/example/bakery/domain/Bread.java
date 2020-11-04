@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 public class Bread {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name, brand;
     private double price;
